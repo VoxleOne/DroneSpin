@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dronespin"
+version = "0.1.0"
+description = "Multi-Drone Guidance System"
+requires-python = ">=3.9"
+dependencies = [
+    "spinstep>=0.3.1a1",
+    "numpy>=1.22",
+    "scipy>=1.10",
+    "matplotlib>=3.5",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["dronespin*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
