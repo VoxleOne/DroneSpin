@@ -1,5 +1,4 @@
 import numpy as np
-from spinstep.utils import quaternion_distance, quaternion_multiply, quaternion_conjugate, rotation_matrix_to_quaternion
 
 
 def slerp(q1, q2, t):
