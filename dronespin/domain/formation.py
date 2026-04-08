@@ -26,13 +26,29 @@ def _now():
 
 
 def make_tetrahedron(scale=1.0, name="tetrahedron") -> Formation:
-    """Regular tetrahedron centered at origin with circumradius = scale."""
+    """Regular tetrahedron centered at origin with circumradius = scale.
+
+    Vertex coordinates are derived analytically for a tetrahedron inscribed in
+    a sphere of radius ``scale``.  The top vertex sits at (0, 0, scale) and the
+    three base vertices are evenly distributed on the cone at polar angle
+    arccos(-1/3) ≈ 109.47°:
+
+    - x-factor for base vertex 0:  2√2 / 3
+    - x/y-factor for base vertices 1 & 2:  √2 / 3  and  √6 / 3
+    - z-component for all base vertices:  -1/3 (× scale)
+    """
+    # Geometric constants for a unit-circumradius regular tetrahedron
+    _BASE_Z = -1.0 / 3.0           # z of base vertices (normalised)
+    _BASE_XY_A = 2.0 * np.sqrt(2) / 3.0  # x of vertex 0 base (normalised)
+    _BASE_XY_B = np.sqrt(2) / 3.0        # |x| of vertices 1 & 2 (normalised)
+    _BASE_XY_C = np.sqrt(6) / 3.0        # |y| of vertices 1 & 2 (normalised)
+
     s = scale
     vertices = [
-        [0.0, 0.0, s],
-        [s * 2*np.sqrt(2)/3, 0.0, -s/3],
-        [-s * np.sqrt(2)/3, s * np.sqrt(6)/3, -s/3],
-        [-s * np.sqrt(2)/3, -s * np.sqrt(6)/3, -s/3],
+        [0.0,               0.0,                s * 1.0],
+        [s * _BASE_XY_A,    0.0,                s * _BASE_Z],
+        [-s * _BASE_XY_B,   s * _BASE_XY_C,     s * _BASE_Z],
+        [-s * _BASE_XY_B,  -s * _BASE_XY_C,     s * _BASE_Z],
     ]
     now = _now()
     return Formation(

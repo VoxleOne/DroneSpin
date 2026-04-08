@@ -53,7 +53,9 @@ def guidance_step(drone_state, formation, traj_sample, dt, slerp_alpha=0.1, spee
     else:
         desired_forward = np.array([0.0, 0.0, 1.0])
 
-    # Compute attention weights over candidate vertex directions
+    # Compute attention weights over all formation vertices to select the
+    # highest-attention target for orientation.  All vertices are considered
+    # candidates so the drone naturally faces the vertex it cares about most.
     candidate_dirs = []
     for v in vertices:
         d = v - drone_state.position

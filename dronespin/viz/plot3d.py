@@ -28,7 +28,10 @@ def plot_simulation(drones, formation, title="DroneSpin", show_forward=True, fil
         zs = [vertices[i, 2], vertices[j, 2]]
         ax.plot(xs, ys, zs, 'b-', alpha=0.3, linewidth=0.8)
 
-    colors = plt.cm.Set1(np.linspace(0, 1, max(len(drones), 1)))
+    if not drones:
+        colors = np.empty((0, 4))
+    else:
+        colors = plt.cm.Set1(np.linspace(0, 1, len(drones)))
     for i, drone in enumerate(drones):
         p = drone.position
         ax.scatter([p[0]], [p[1]], [p[2]],
