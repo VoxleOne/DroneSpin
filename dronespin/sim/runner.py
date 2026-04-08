@@ -18,7 +18,7 @@ class SimRunner:
         self.t = 0.0
         self.step_count = 0
         self.history = []
-        np.random.seed(seed)
+        self.rng = np.random.default_rng(seed)
         n_v = len(formation.vertices)
         for i, d in enumerate(drones):
             if d.assigned_vertex is None:
