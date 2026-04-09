@@ -1,2 +1,2 @@
 # DroneSpin
-Attention-powered Vehicle Guicance
+Attention-powered Vehicle Guidance
